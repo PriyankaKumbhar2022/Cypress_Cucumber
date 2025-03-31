@@ -2,6 +2,7 @@ export class LoginPage {
 
 navigate(){
     cy.visit("https://opensource-demo.orangehrmlive.com/web/index.php/auth/login");
+    console.log("url launched successfully..")
 }
 
 enterCredentials(username, password){
@@ -43,4 +44,4 @@ VerifyInvalidError(){
 }
 
 } 
-export const loginPage = new LoginPage();
+export default new LoginPage();

@@ -3,6 +3,7 @@ import { addCucumberPreprocessorPlugin } from "@badeball/cypress-cucumber-prepro
 import { createEsbuildPlugin } from "@badeball/cypress-cucumber-preprocessor/esbuild";
 import createBundler from "@bahmutov/cypress-esbuild-preprocessor";
 import XLSX from "xlsx"; 
+import { readExcel } from "./cypress/utils/sample";
 
 export default defineConfig({
   e2e: {
@@ -14,30 +15,8 @@ export default defineConfig({
       }));
 
       on("task", {
-        readExcel({ filePath, sheetName }) {
-          const workbook = XLSX.readFile(filePath);
-          const sheet = workbook.Sheets[sheetName];
-
-          // Read sheet as an array (header: 1 ensures we get raw rows)
-          const sheetData = XLSX.utils.sheet_to_json(sheet, { header: 1 });
-
-          if (sheetData.length < 2) {
-            throw new Error("Excel file does not contain test data");
-          }
-
-          const headers = sheetData[0]; // Extract the first row as headers
-          const dataRows = sheetData.slice(1); // Remove the first row (headers)
-
-          // Convert data into objects using headers
-          const formattedData = dataRows.map((row) => {
-            const obj = {};
-            headers.forEach((key, i) => {
-              obj[key] = row[i] !== undefined ? row[i] : "";
-            });
-            return obj;
-          });
-
-          return formattedData; // ✅ Ensure only actual data is returned
+        readExcelData({ filePath, sheetName }) {
+          return readExcel(filePath, sheetName);
         },
       });
 
