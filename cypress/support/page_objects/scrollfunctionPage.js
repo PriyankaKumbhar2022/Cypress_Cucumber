@@ -32,7 +32,7 @@ export class ScrollDropdown {
             }
         });
         
-        cy.xpath("//h1[text()='Multiselect-dropdown demo!']").click();
+      cy.xpath("//h1[text()='Multiselect-dropdown demo!']").click();
     }
     
  }
