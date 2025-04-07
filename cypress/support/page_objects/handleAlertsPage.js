@@ -13,6 +13,7 @@ export class AlertPopup {
             } else {
                  console.log("Heading does not match! Found:", headingText);
                  cy.screenshot();
+                 
               }
           });
     }

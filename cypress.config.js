@@ -5,6 +5,7 @@ import createBundler from "@bahmutov/cypress-esbuild-preprocessor";
 import XLSX from "xlsx"; 
 import { readExcel } from "./cypress/utils/sample";
 import allureWriter from "@shelex/cypress-allure-plugin/writer";
+import dayjs from "dayjs";
 
 import fs from "fs-extra";
 
@@ -23,6 +24,7 @@ export default defineConfig({
           return readExcel(filePath, sheetName);
         },
       });
+      
 
       on('before:run', () => {
         console.log("Deleting Allure folders before test run...");
@@ -50,6 +52,10 @@ export default defineConfig({
     },
     env: {
       allure: true, // Enable Allure reporting
+    },
+
+    env: {
+      currentDate: dayjs().format("YYYY-MM-DD"),
     },
   },
 });

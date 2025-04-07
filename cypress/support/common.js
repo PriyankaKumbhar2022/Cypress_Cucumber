@@ -1,17 +1,14 @@
 import { Before, After } from "@badeball/cypress-cucumber-preprocessor";
+import { beforeEach, afterEach } from "mocha";
 
-Before(() => {
+beforeEach(() => {
     cy.clearCookies();
-    cy.clearLocalStorage(); 
-    const screenshotDir = "cypress/screenshots";
-
-  if (fs.existsSync(screenshotDir)) {
-    fs.rmdirSync(screenshotDir, { recursive: true }); // Delete all screenshots
-    console.log("Screenshots folder cleared.");
-  }
+    cy.clearLocalStorage();
+    clearCookies: true
+  
 });
 
-After(() => {
+afterEach(() => {
     cy.clearCookies();
     cy.clearLocalStorage();
   });

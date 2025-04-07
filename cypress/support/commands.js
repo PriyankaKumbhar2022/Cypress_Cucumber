@@ -24,6 +24,7 @@
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 import * as XLSX from 'xlsx';
+import 'cypress-iframe';
 
 Cypress.Commands.add('readExcel', (filePath, sheetName) => {
   return cy.task('readExcel', { filePath, sheetName });
